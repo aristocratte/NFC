@@ -1,4 +1,19 @@
-# Android NFC + Arduino + PN352
+# Voz · Estrategia — GIGN
+
+App de acceso NFC para un callcenter de estrategias políticas, hecha con React Native y Expo.
+
+Equipo: Aristide Cordonnier, Mathis Gil y Oscar Buat.
+
+- [APK para Android](Voz-Estrategia.apk)
+- [Código e instrucciones de la app](expo-client/README.md)
+- [Reporte PDF](reporte/Reporte_Practica4_GIGN.pdf)
+- [Reporte Word](reporte/Reporte_Practica4_GIGN.docx)
+
+Instalar el APK, activar NFC e iniciar sesión con la cuenta de MonsterBallGo. Acercar el teléfono desbloqueado al lector. La app envía el ID; el lector y el servidor deciden el acceso. La conexión con las cuentas reales y la lectura NFC aún requieren una prueba en el dispositivo del equipo.
+
+El código original de Android, el servidor y el firmware se conservan a partir de [NFCAccesoFisico del profesor](https://github.com/fmg2099/NFCAccesoFisico).
+
+## Proyecto original: Android NFC + Arduino + PN532
 
 Este proyecto contiene una aplicación Android y un sketch de Arduino para demostrar el uso de Android HCE (Host Card Emulation) como sistema de identificación y acceso en un sistema físico. 
 
