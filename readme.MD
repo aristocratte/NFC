@@ -1,54 +1,39 @@
-# Voz · Estrategia — GIGN
+# Voz · Estrategia
 
-App de acceso NFC para un callcenter de estrategias políticas, hecha con React Native y Expo.
+Application React Native et Expo de l’équipe GIGN pour un callcenter de stratégies politiques. Connexion à l’API du professeur, crédentielle avec photo et numéro utilisateur, crédits et communication NFC Android.
 
-Equipo: Aristide Cordonnier, Mathis Gil y Oscar Buat.
+## Installer sur Android
 
-- [APK para Android](Voz-Estrategia.apk)
-- [Código e instrucciones de la app](expo-client/README.md)
-- [Reporte PDF](reporte/Reporte_Practica4_GIGN.pdf)
-- [Reporte Word](reporte/Reporte_Practica4_GIGN.docx)
+Télécharger [Voz-Estrategia.apk](./Voz-Estrategia.apk), installer le fichier puis ouvrir l’application. Il faut un téléphone Android 7 ou plus avec NFC et émulation de carte HCE. Activer NFC, se connecter avec son compte MonsterBallGo et présenter le téléphone déverrouillé au lecteur du professeur.
 
-Instalar el APK, activar NFC e iniciar sesión con la cuenta de MonsterBallGo. Acercar el teléfono desbloqueado al lector. La app envía el ID; el lector y el servidor deciden el acceso. El login real funcionó con las tres cuentas en el navegador. Sus autorizaciones se comprobaron con consultas directas a la API y al panel. La instalación en Android y la lectura NFC aún requieren una prueba.
+Le lecteur décide de l’accès. L’application signale seulement sa détection. L’APK fonctionne sans serveur Expo. Expo Go et le navigateur ne permettent pas l’échange NFC de cette application.
 
-El código original de Android, el servidor y el firmware se conservan a partir de [NFCAccesoFisico del profesor](https://github.com/fmg2099/NFCAccesoFisico).
+## Développer
 
-## Proyecto original: Android NFC + Arduino + PN532
+```sh
+cd expo-client
+npm ci
+npm run web
+```
 
-Este proyecto contiene una aplicación Android y un sketch de Arduino para demostrar el uso de Android HCE (Host Card Emulation) como sistema de identificación y acceso en un sistema físico. 
+Pour compiler et installer sur un Android connecté en USB, avec un JDK et le SDK Android configurés :
 
-Mediante  el protocolo APDU establece una comunicación de bajo nivel para intercambiar un ID de 4 bytes representando a un usuario. 
+```sh
+npm run build:android
+```
 
-## Hardware
+Pour compiler uniquement l’APK :
 
-* Arduino Nano ESP32
-* Elechouse PN532 v3 en modo HSU (MUY importante)
-* Dispositivo móvil Android mayor a API 24
+```sh
+npx expo prebuild --platform android
+cd android
+./gradlew :app:assembleRelease -PreactNativeArchitectures=arm64-v8a,armeabi-v7a
+```
 
-## Bibliotecas
+Sous Windows, utiliser `gradlew.bat`. Le résultat se trouve dans `expo-client/android/app/build/outputs/apk/release/app-release.apk` depuis la racine du dépôt.
 
-Utiliza una versión modificada específicamente para funcionar en Arduino Nano ESP32 de las bibliotecas de [Elechouse PN532](https://github.com/elechouse/PN532).
+Le code des écrans est dans `expo-client/src/app/`. Le module NFC est dans `expo-client/modules/acceso-nfc/`. Il répond à l’AID `F012345678` avec le numéro utilisateur sur quatre octets little endian, suivis de `90 00`, comme l’attend le lecteur.
 
-*pegar el link del repo conlas biblotecas modificadas*
+Équipe : Aristide Cordonnier, Mathis Gil et Oscar Buat.
 
-## Referencias
-
-Manual de usuario de la placa PN532
-
-https://www.elechouse.com/elechouse/images/product/PN532_module_V3/PN532_%20Manual_V3.pdf
-
-Tutorial para crear una aplicación APDU
-
-https://medium.com/@androidcrypto/how-to-use-host-based-card-emulation-hce-in-android-a-beginner-tutorial-java-32974dd89529
-
-Protocolo APDU
-
-https://en.wikipedia.org/wiki/Smart_card_application_protocol_data_unit
-
-Lista de Application Identifiers ISO14443A
-
-https://www.eftlab.com/knowledge-base/complete-list-of-application-identifiers-aid
-
-## Licencia
-
-TBD
+La partie NFC est adaptée de l’[exemple du professeur](https://github.com/fmg2099/NFCAccesoFisico). Le serveur et le firmware de référence sont disponibles dans ce dépôt d’origine. Logos des technologies : [Devicon](https://github.com/devicons/devicon).

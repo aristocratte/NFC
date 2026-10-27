@@ -1,21 +1,28 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+# Fichiers locaux
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+.idea/
+.gradle/
 local.properties
+node_modules/
+.expo/
+.local/
+.claude/
+AGENTS.md
+*.log
 
-# Arduino Build artifacts
-firmware/build/
-*.hex
-*.elf
+# Exemples du professeur et rapports conservés localement
+/app/
+/server/
+/firmware/
+/reporte/
+/gradle/
+/build.gradle.kts
+/settings.gradle.kts
+/gradle.properties
+/gradlew
+/gradlew.bat
 
+# Documentation en double et images inutilisées
+/expo-client/README.md
+/expo-client/assets/android-icon-background.png
+/expo-client/assets/splash-icon.png
