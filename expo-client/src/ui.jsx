@@ -18,7 +18,7 @@ export function Brand() {
         <Text style={styles.logoText}>NFC</Text>
       </View>
       <View>
-        <Text style={styles.brandName}>Acceso NFC</Text>
+        <Text style={styles.brandName}>Voz · Estrategia</Text>
       </View>
     </View>
   );

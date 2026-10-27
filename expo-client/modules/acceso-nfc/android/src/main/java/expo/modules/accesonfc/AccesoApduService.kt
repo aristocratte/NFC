@@ -8,7 +8,8 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 
 // Adaptado de app/.../MainActivity.kt del repositorio original.
-// SELECT AID F012345678 -> ID de 4 bytes, big endian, seguido de 90 00.
+// ScannerHTTP copia los bytes a un uint32_t del ESP32 (little endian).
+// SELECT AID F012345678 -> ID de 4 bytes, seguido de 90 00.
 class AccesoApduService : HostApduService() {
   private val selectAid = byteArrayOf(0x00, 0xA4.toByte(), 0x04, 0x00, 0x05,
     0xF0.toByte(), 0x12, 0x34, 0x56, 0x78)
@@ -30,8 +31,8 @@ class AccesoApduService : HostApduService() {
       vibrator?.vibrate(100)
     }
     ScannerEvents.onDetected?.invoke()
-    return byteArrayOf((id shr 24).toByte(), (id shr 16).toByte(),
-      (id shr 8).toByte(), id.toByte(), 0x90.toByte(), 0x00)
+    return byteArrayOf(id.toByte(), (id shr 8).toByte(),
+      (id shr 16).toByte(), (id shr 24).toByte(), 0x90.toByte(), 0x00)
   }
 
   override fun onDeactivated(reason: Int) = Unit
