@@ -46,7 +46,7 @@ Résultat : `android/app/build/outputs/apk/release/app-release.apk` depuis `expo
 - `src/nfc.js` : raccord JavaScript vers Android.
 - `modules/acceso-nfc/` : module Expo local, service HCE et conversion APDU.
 
-Le login utilise `POST https://monsterballgo.com/api/login.php` avec `FormData` : `token=code37` (valeur publique de l’exemple du professeur), `user` et `pass` en SHA-256 hexadécimal. Le contrat vient de [expo-login-registro](https://github.com/fmg2099/expo-login-registro/blob/master/app/index.tsx). La réponse fournit `id`, `username`, `first_name`, `last_name` et `pfp_url`. Le numéro doit être compris entre 1 et 4294967295. Le mot de passe n’est pas sauvegardé.
+Le login utilise `POST https://monsterballgo.com/api/login.php` avec `FormData` : `token=code37` (valeur publique de l’exemple du professeur), `user` et `pass` en SHA-256 hexadécimal. Le contrat vient de [expo-login-registro](https://github.com/fmg2099/expo-login-registro/blob/master/app/index.tsx). La réponse réelle fournit `id`, `username`, `firstname`, `lastname` et `pfp_url`. `src/api.js` convertit les deux champs de nom vers `first_name` et `last_name` pour les écrans. Le numéro doit être compris entre 1 et 4294967295. Le mot de passe n’est pas sauvegardé.
 
 ## Vérification et remise
 
@@ -60,7 +60,9 @@ La compilation Android release a réussi pour `arm64-v8a` et `armeabi-v7a`. La s
 
 Les profils publics et les images des trois membres répondent en HTTP 200. Des appels directs à l’API du scanner depuis l’ordinateur ont obtenu `si` pour les trois IDs ; le vrai panel a affiché leurs noms et numéros en vert. Ces appels ont été faits pendant la vérification, pas par l’application mobile, et ne sont pas des scans NFC.
 
-La vérification du navigateur couvre 20 cas : formulaire, rejet réel d’un compte fictif, erreurs simulées, trois crédentielles préparées avec leurs profils publics, navigation, déconnexion et six logos. La classe Kotlin compilée a passé 20 vérifications avec des fonctions Android remplacées pour l’exécution sur ordinateur. Le code du serveur et celui du panel ont aussi été vérifiés avec des données simulées. Les comptes réels n’ont pas été authentifiés, car leurs mots de passe n’étaient pas disponibles. L’installation sur téléphone, la radio NFC et la vibration physique restent à vérifier.
+La connexion réelle à l’API a réussi pour `aristidecordonnier`, `mathisgil` et `oscarbuat` depuis l’app dans le navigateur. Les trois photos, noms complets et IDs ont été vérifiés, ainsi que la déconnexion et la protection de la route. Les captures des crédentielles dans le rapport proviennent de ces sessions réelles. Aucun identifiant secret n’est fourni dans le dépôt.
+
+La vérification du navigateur couvre aussi 20 cas avec les erreurs et des réponses simulées au format réel de l’API. La classe Kotlin compilée a passé 20 vérifications avec des fonctions Android remplacées pour l’exécution sur ordinateur. Le code du serveur et celui du panel ont aussi été vérifiés avec des données simulées. L’installation sur téléphone, la radio NFC et la vibration physique restent à vérifier.
 
 Sur le téléphone du groupe, vérifier successivement les trois comptes (`aristidecordonnier`, `mathisgil`, `oscarbuat`), dont celui bloqué par le professeur. Conserver la capture du panel web et une photo du montage avec le LED correspondant. Le rapport modifiable et le PDF sont dans `../reporte/` : y ajouter les résultats physiques et les preuves, puis relire les conclusions avec les mots de l’équipe. Le numéro de groupe exact reste à confirmer dans les crédits. Dépôt du groupe : [aristocratte/NFC](https://github.com/aristocratte/NFC).
 

@@ -21,7 +21,13 @@ export async function login(username, password) {
     if (!Number.isInteger(id) || id < 1 || id > 0xffffffff) {
       throw new Error('La API no devolvió un número de usuario válido.');
     }
-    return { ...data, id };
+    return {
+      id,
+      username: data.username,
+      first_name: data.firstname ?? data.first_name ?? '',
+      last_name: data.lastname ?? data.last_name ?? '',
+      pfp_url: data.pfp_url,
+    };
   } catch (error) {
     if (error.name === 'AbortError') throw new Error('La conexión tardó demasiado. Intenta de nuevo.');
     if (error instanceof TypeError) throw new Error('No se pudo conectar. Revisa tu conexión a Internet.');
